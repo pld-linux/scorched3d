@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Scorched 3d
+Type=Application
+Exec=scorched3d
+Icon=scorched3d.png
+
+GenericName=3D tank game
+GenericName[pl]=Trójwymiarowe czołgi
+Categories=Game;ArcadeGame
