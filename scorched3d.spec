@@ -13,6 +13,7 @@ BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
+BuildRequires:	automake
 BuildRequires:	wxGTK2-devel
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,6 +32,7 @@ Earth.
 %setup -q -n scorched
 
 %build
+cp -f /usr/share/automake/config.sub .
 CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}"
 %configure \
 	--datadir=%{_datadir}/%{name} \
