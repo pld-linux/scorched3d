@@ -1,14 +1,14 @@
 Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
-Version:	36.1
-Release:	2
+Version:	36.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/Scorched3D-%{version}-src.tar.gz
-# Source0-md5:	598f0e8da4c26f075a8b39185647e772
+# Source0-md5:	7388dfaadd7bc568d2c341539fb27184
 Source1:	%{name}.desktop
-Patch0:		%{name}-types.patch
+#Patch0:		%{name}-types.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenGL-devel
@@ -30,7 +30,7 @@ Earth.
 
 %prep
 %setup -q -n scorched
-%patch0 -p1
+##%patch0 -p1
 
 %build
 CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}"
