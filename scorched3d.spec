@@ -8,7 +8,6 @@ Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/Scorched3D-%{version}-src.tar.gz
 # Source0-md5:	3cdb264d164177316d3b01d8d4c6070b
 Source1:	%{name}.desktop
-#Patch0:		%{name}-types.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenGL-devel
@@ -30,7 +29,6 @@ Earth.
 
 %prep
 %setup -q -n scorched
-##%patch0 -p1
 
 %build
 CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}"
@@ -47,9 +45,6 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_desktopdir},%{_pixmapsdir}}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	datadir=%{_datadir}/%{name}
-#	prefix=$RPM_BUILD_ROOT%{_datadir}
-
-#mv $RPM_BUILD_ROOT%{_datadir}/%{name}/%{name} $RPM_BUILD_ROOT%{_bindir}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/documentation/*.txt
 
