@@ -1,34 +1,40 @@
-Name:		scorched3d
 Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
+Name:		scorched3d
 Version:	36.1
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-URL:		http://www.scorched3d.co.uk
-Source0:	http://dl.sourceforge.net/sourceforge/scorched3d/Scorched3D-%{version}-src.tar.gz
+Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
 # Source0-md5:	598f0e8da4c26f075a8b39185647e772
 Source1:	scorched3d.desktop
-BuildRequires:	wxGTK2-devel
+Patch0:		%{name}-types.patch
+URL:		http://www.scorched3d.co.uk/
+BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenGL-devel
-BuildRequires:	SDL_net-devel
 BuildRequires:	SDL_mixer-devel
-BuildRequires: ImageMagick-coder-png
+BuildRequires:	SDL_net-devel
+BuildRequires:	wxGTK2-devel
+Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 Scorched 3D is a game based loosely on the classic DOS game Scorched
 Earth "The Mother Of All Games".
 
 %description -l pl
-Scorched 3D jest gr± bazuj±c± na klasycznej DOSowej grze Scorched Earth.
+Scorched 3D jest gr± bazuj±c± na klasycznej DOS-owej grze Scorched
+Earth.
 
 %prep
 %setup -q -n scorched
+%patch0 -p1
 
 %build
+CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}"
 %configure \
-	CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}" \
 	--prefix=%{_datadir} \
 	--with-wx-config=wxgtk2-2.4-config 
 
@@ -37,6 +43,7 @@ Scorched 3D jest gr± bazuj±c± na klasycznej DOSowej grze Scorched Earth.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
+
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_datadir}
 
@@ -53,10 +60,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root)%{_bindir}/%{name}
 %doc documentation/*.txt
+%attr(755,root,root) %{_bindir}/%{name}
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/data
-%{_datadir}/%{name}/documentation/
+%{_datadir}/%{name}/documentation
 %{_pixmapsdir}/*
 %{_desktopdir}/*
