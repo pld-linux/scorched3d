@@ -1,0 +1,33 @@
+--- scorched/src/tank/TankShields.cpp.orig	2003-11-27 23:43:01.000000000 +0000
++++ scorched/src/tank/TankShields.cpp	2003-12-22 10:45:36.000000000 +0000
+@@ -122,7 +122,7 @@
+ 	buffer.addToBuffer((unsigned int)(currentShield_?currentShield_->getAccessoryId():0));
+ 
+ 	std::map<Shield *, int>::iterator itor;
+-	buffer.addToBuffer(shields_.size());
++	buffer.addToBuffer((unsigned int)shields_.size());
+ 	for (itor = shields_.begin();
+ 		itor != shields_.end();
+ 		itor++)
+--- scorched/src/tank/TankWeapon.cpp.orig	2003-11-27 23:43:01.000000000 +0000
++++ scorched/src/tank/TankWeapon.cpp	2003-12-22 10:46:54.000000000 +0000
+@@ -181,7 +181,7 @@
+ bool TankWeapon::writeMessage(NetBuffer &buffer)
+ {
+ 	std::map<Weapon *, int>::iterator itor;
+-	buffer.addToBuffer(weapons_.size());
++	buffer.addToBuffer((unsigned int)weapons_.size());
+ 	for (itor = weapons_.begin();
+ 		itor != weapons_.end();
+ 		itor++)
+--- scorched/src/actions/TankMovement.cpp.orig	2003-11-12 12:50:59.000000000 +0000
++++ scorched/src/actions/TankMovement.cpp	2003-12-22 11:03:44.000000000 +0000
+@@ -174,7 +174,7 @@
+ bool TankMovement::writeAction(NetBuffer &buffer)
+ {
+ 	buffer.addToBuffer(playerId_);
+-	buffer.addToBuffer(positions_.size());
++	buffer.addToBuffer((unsigned int)positions_.size());
+ 	std::list<unsigned int>::iterator itor;
+ 	for (itor = positions_.begin();
+ 		itor != positions_.end();
