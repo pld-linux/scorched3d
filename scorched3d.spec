@@ -2,15 +2,16 @@ Name:		scorched3d
 Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Version:	36.1
-Release:	0.2
+Release:	1
 License:	GPL
 Group:		X11/Applications/Games
 URL:		http://www.scorched3d.co.uk
 Source0:	http://dl.sourceforge.net/sourceforge/scorched3d/Scorched3D-%{version}-src.tar.gz
 # Source0-md5:	598f0e8da4c26f075a8b39185647e772
+BuildRequires:	wxGTK2-devel
+BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	SDL_mixer-devel
-BuildRequires:	wxGTK2-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,8 +26,8 @@ Scorched 3D jest gr± bazuj±c± na klasycznej DOSowej grze Scorched Earth.
 
 %build
 %configure \
-	--prefix=%{_datadir} \
 	CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}" \
+	--prefix=%{_datadir} \
 	--with-wx-config=wxgtk2-2.4-config 
 
 %{__make}
@@ -36,6 +37,7 @@ rm -rf $R PM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_bindir}
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_datadir}
+
 mv $RPM_BUILD_ROOT%{_datadir}/%{name}/%{name} $RPM_BUILD_ROOT%{_bindir}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/documentation/*.txt
