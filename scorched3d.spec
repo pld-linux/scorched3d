@@ -16,6 +16,7 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	automake
 BuildRequires:	wxGTK2-devel
+BuildRequires:	freetype-devel
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
