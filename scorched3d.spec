@@ -5,9 +5,9 @@ Version:	36.1
 Release:	2
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/Scorched3D-%{version}-src.tar.gz
 # Source0-md5:	598f0e8da4c26f075a8b39185647e772
-Source1:	scorched3d.desktop
+Source1:	%{name}.desktop
 Patch0:		%{name}-types.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
@@ -42,7 +42,7 @@ CXXFLAGS="-L/usr/X11R6/lib %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_datadir}
@@ -51,8 +51,7 @@ mv $RPM_BUILD_ROOT%{_datadir}/%{name}/%{name} $RPM_BUILD_ROOT%{_bindir}
 
 rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/documentation/*.txt
 
-install -D %{SOURCE1} ${RPM_BUILD_ROOT}%{_desktopdir}/scorched3d.desktop
-install -d ${RPM_BUILD_ROOT}%{_pixmapsdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 convert $RPM_BUILD_DIR/scorched/data/windows/tank2.bmp $RPM_BUILD_ROOT%{_pixmapsdir}/scorched3d.png
 
 %clean
