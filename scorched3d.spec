@@ -6,7 +6,7 @@ Version:	38.1b
 Release:	1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/Scorched3D-%{_ver}-src.tar.gz
+Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{_ver}-src.tar.gz
 # Source0-md5:	3c32897814c4fc71be864fdb8d6f5505
 Source1:	%{name}.desktop
 URL:		http://www.scorched3d.co.uk/
@@ -14,9 +14,10 @@ BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
+BuildRequires:	SDL-devel >= 1.2.5
 BuildRequires:	automake
-BuildRequires:	freetype-devel
-BuildRequires:	wxGTK2-devel
+BuildRequires:	freetype-devel >= 2.1.0
+BuildRequires:	wxGTK2-devel >= 2.6.0
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -38,7 +39,7 @@ cp -f /usr/share/automake/config.sub .
 CXXFLAGS="-L/usr/X11R6/%{_lib} %{rpmcflags}"
 %configure \
 	--datadir=%{_datadir}/%{name} \
-	--with-wx-config=wxgtk2-2.4-config 
+	--with-wx-config=wx-gtk2-ansi-config 
 
 %{__make}
 
