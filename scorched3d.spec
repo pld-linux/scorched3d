@@ -11,7 +11,7 @@ Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{_ver}-src.tar.gz
 Source1:	%{name}.desktop
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
-BuildRequires:  OpenAL-devel >= 0.0.8
+BuildRequires:	OpenAL-devel >= 0.0.8
 BuildRequires:	OpenGL-devel 
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
