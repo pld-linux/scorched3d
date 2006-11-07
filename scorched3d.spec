@@ -68,4 +68,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/data
 %{_datadir}/%{name}/documentation
 %{_pixmapsdir}/*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
