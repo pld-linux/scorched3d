@@ -17,6 +17,7 @@ BuildRequires:	SDL_mixer-devel
 BuildRequires:	SDL_net-devel
 BuildRequires:	SDL-devel >= 1.2.5
 BuildRequires:	automake
+BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	wxGTK2-devel >= 2.6.0
 Requires:	OpenGL
