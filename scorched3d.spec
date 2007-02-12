@@ -1,5 +1,5 @@
 Summary:	A 3D version of the classic DOS game Scorched Earth
-Summary(pl):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
+Summary(pl.UTF-8):   Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
 Version:	40.1b
 %define		_ver	40.1b
@@ -29,8 +29,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Scorched 3D is a game based loosely on the classic DOS game Scorched
 Earth "The Mother Of All Games".
 
-%description -l pl
-Scorched 3D jest gr± bazuj±c± na klasycznej DOS-owej grze Scorched
+%description -l pl.UTF-8
+Scorched 3D jest grÄ… bazujÄ…cÄ… na klasycznej DOS-owej grze Scorched
 Earth.
 
 %prep
