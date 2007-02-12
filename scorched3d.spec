@@ -1,5 +1,5 @@
 Summary:	A 3D version of the classic DOS game Scorched Earth
-Summary(pl.UTF-8):   Wersja 3D klasycznej DOS-owej gry Scorched Earth
+Summary(pl.UTF-8):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
 Version:	40.1b
 %define		_ver	40.1b
