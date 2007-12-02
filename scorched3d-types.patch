@@ -1,0 +1,36 @@
+--- scorched/src/porting/windows.h.orig	2004-11-28 20:25:45.000000000 +0100
++++ scorched/src/porting/windows.h	2007-12-02 03:05:59.878393376 +0100
+@@ -9,33 +9,10 @@
+ #include <ctype.h>
+ #include <common/Defines.h>
+ 
+-typedef char * 		LPSTR;
+-typedef const char *	LPCTSTR;
+-typedef unsigned int 	DWORD;
+-typedef unsigned int *  LPDWORD;
+-typedef unsigned char * LPBYTE;
+-typedef int 		INT;
+-typedef long         	LONG;
+-typedef unsigned int	UINT;
+-typedef unsigned short  WORD;
+-typedef unsigned char   BYTE;
+-
+-typedef int 	HWND;
+-typedef void * 	HINSTANCE;
+-typedef int 	WPARAM;
+-typedef int 	LPARAM;
+-typedef int 	LRESULT;
+-typedef void *	HDC;
+-typedef void *  HGLRC;
+-
+ #define _strnicmp(a,b,c)	strncasecmp(a,b,c)
+ #define stricmp(a,b)		strcasecmp(a,b)
+ #define _strlwr(a)		{ for (char *b=a; *b; b++) *b=tolower(*b); }
+ 
+-/* registry */
+-typedef int     HKEY; 
+-#define HKEY_CURRENT_USER 0
+-
+ #ifndef TRUE
+ #define TRUE true
+ #endif
