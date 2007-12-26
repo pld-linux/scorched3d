@@ -1,12 +1,10 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Scorched 3d
 Comment=3D version of Scorched Earth game
 Comment[pl]=Wersja 3D gry Scorched Earth
 Type=Application
 Exec=scorched3d
-Icon=scorched3d.png
-
+Icon=scorched3d
 GenericName=3D tank game
 GenericName[pl]=Trójwymiarowe czołgi
 Categories=Game;ArcadeGame;
