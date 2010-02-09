@@ -19,11 +19,15 @@ BuildRequires:	SDL_net-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	dos2unix
+BuildRequires:	expat-devel
 BuildRequires:	fftw3-single-devel >= 3.0
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel >= 2.1.0
+BuildRequires:	libjpeg-devel
 BuildRequires:	libogg-devel
+BuildRequires:	libpng-devel
 BuildRequires:	libvorbis-devel
+BuildRequires:	pkgconfig
 BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -36,9 +40,9 @@ other players, and remotely across the Internet or LAN.
 
 %description -l pl.UTF-8
 Scorched 3D to wieloplatformowe, trójwymiarowe odtworzenie popularnej
-dwuwymiarowej gry artyleryjnej Scorched Earth. W Scorched3D można
-grać przeciwko komputerowi, innym graczom oraz zdalnie poprzez
-Internet lub LAN.
+dwuwymiarowej gry artyleryjnej Scorched Earth. W Scorched3D można grać
+przeciwko komputerowi, innym graczom oraz zdalnie poprzez Internet lub
+LAN.
 
 %prep
 %setup -q -n scorched
