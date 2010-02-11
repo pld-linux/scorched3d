@@ -2,7 +2,7 @@ Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl.UTF-8):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
 Version:	42.1
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
@@ -10,6 +10,7 @@ Source0:	http://dl.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-types.patch
 Patch1:		%{name}-openal.patch
+Patch2:		%{name}-libpng.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenAL-devel >= 0.0.8
@@ -18,7 +19,6 @@ BuildRequires:	SDL-devel >= 1.2.5
 BuildRequires:	SDL_net-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	dos2unix
 BuildRequires:	expat-devel
 BuildRequires:	fftw3-single-devel >= 3.0
 BuildRequires:	freealut-devel
@@ -28,6 +28,8 @@ BuildRequires:	libogg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.533
+BuildRequires:	sed >= 4.0
 BuildRequires:	wxGTK2-devel >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -46,9 +48,11 @@ LAN.
 
 %prep
 %setup -q -n scorched
-dos2unix src/common/porting/windows.h
+%undos src/common/porting/windows.h
 %patch0 -p1
 %patch1 -p1
+%undos src/common/image/ImagePng.cpp
+%patch2 -p1
 
 %build
 %{__aclocal}
