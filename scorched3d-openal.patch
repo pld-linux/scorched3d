@@ -1,6 +1,6 @@
---- scorched3d/configure-al.m4
-+++ scorched3d/configure-al.m4
-@@ -1,111 +1,8 @@
+--- scorched/configure-al.m4~	2009-10-02 00:22:31.000000000 +0200
++++ scorched/configure-al.m4	2010-05-04 13:58:31.557872694 +0200
+@@ -1,109 +1,8 @@
  dnl Checking for OpenAL
 -AC_ARG_WITH([openal-static],
 -            AC_HELP_STRING([--with-openal-static],
@@ -57,7 +57,6 @@
 -	AC_TRY_COMPILE([
 -#ifdef __APPLE__
 -		#include <OpenAL/al.h>
--		#include <OpenAL/alut.h>
 -		#include <OpenAL/alc.h>
 -#else
 -		#include <AL/al.h>
@@ -77,7 +76,6 @@
 -	AC_TRY_LINK([
 -#ifdef __APPLE__
 -		#include <OpenAL/al.h>
--		#include <OpenAL/alut.h>
 -		#include <OpenAL/alc.h>
 -#else
 -		#include <AL/al.h>
