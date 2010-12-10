@@ -1,12 +1,12 @@
 Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl.UTF-8):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
-Version:	43.2
+Version:	43.2a
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://downloads.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
-# Source0-md5:	a40def5cba8cacf58bba93064c94aa73
+# Source0-md5:	876de173218fd83a2b0a30255ba694fa
 Source1:	%{name}.desktop
 Patch0:		%{name}-types.patch
 Patch1:		%{name}-openal.patch
@@ -69,7 +69,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_desktopdir},%{_pixmapsdir}}
 	DESTDIR=$RPM_BUILD_ROOT \
 	datadir=%{_datadir}/%{name}
 
-rm -f $RPM_BUILD_ROOT%{_datadir}/%{name}/documentation/*.txt
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/documentation/*.txt
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 convert $RPM_BUILD_DIR/scorched/data/images/tank2.bmp $RPM_BUILD_ROOT%{_pixmapsdir}/scorched3d.png
