@@ -1,0 +1,87 @@
+--- scorched/src/common/image/ImagePngFactory.cpp~	2010-08-07 23:27:04.000000000 +0200
++++ scorched/src/common/image/ImagePngFactory.cpp	2012-02-12 12:56:58.330929507 +0100
+@@ -104,7 +104,7 @@
+ 
+ static void user_png_error(png_structp png_ptr, png_const_charp msg) 
+ {
+-	longjmp(png_ptr->jmpbuf,1);
++	longjmp(png_jmpbuf(png_ptr),1);
+ }
+ 
+ static void user_png_warning(png_structp png_ptr, png_const_charp msg) 
+--- scorched/src/client/client/LoadPNG.cpp~	2010-08-16 01:26:36.000000000 +0200
++++ scorched/src/client/client/LoadPNG.cpp	2012-02-12 12:51:20.395625495 +0100
+@@ -12,7 +12,7 @@
+ 
+ SDL_Surface *EXT_LoadPNG_RW(SDL_RWops *src)
+ {
+-	int start;
++	int start, num_palette;
+ 	const char *error;
+ 	SDL_Surface *volatile surface;
+ 	png_structp png_ptr;
+@@ -28,6 +28,7 @@
+ 	int row, i;
+ 	volatile int ckey = -1;
+ 	png_color_16 *transv;
++	png_colorp png_palette;
+ 
+ 	if ( !src ) {
+ 		/* The error message has been set in SDL_RWFromFile */
+@@ -58,7 +59,7 @@
+ 	 * the normal method of doing things with libpng).  REQUIRED unless you
+ 	 * set up your own error handlers in png_create_read_struct() earlier.
+ 	 */
+-	if ( setjmp(png_ptr->jmpbuf) ) {
++	if ( setjmp(png_jmpbuf(png_ptr)) ) {
+ 		error = "Error reading the PNG file.";
+ 		goto done;
+ 	}
+@@ -127,9 +128,9 @@
+ 			Rmask = 0x000000FF;
+ 			Gmask = 0x0000FF00;
+ 			Bmask = 0x00FF0000;
+-			Amask = (info_ptr->channels == 4) ? 0xFF000000 : 0;
++			Amask = (png_get_channels(png_ptr, info_ptr) == 4) ? 0xFF000000 : 0;
+ 		} else {
+-		        int s = (info_ptr->channels == 4) ? 0 : 8;
++		        int s = (png_get_channels(png_ptr, info_ptr) == 4) ? 0 : 8;
+ 			Rmask = 0xFF000000 >> s;
+ 			Gmask = 0x00FF0000 >> s;
+ 			Bmask = 0x0000FF00 >> s;
+@@ -137,7 +138,7 @@
+ 		}
+ 	}
+ 	surface = SDL_AllocSurface(SDL_SWSURFACE, width, height,
+-			bit_depth*info_ptr->channels, Rmask,Gmask,Bmask,Amask);
++			bit_depth*png_get_channels(png_ptr, info_ptr), Rmask,Gmask,Bmask,Amask);
+ 	if ( surface == NULL ) {
+ 		error = "Out of memory";
+ 		goto done;
+@@ -177,6 +178,7 @@
+ 
+ 	/* Load the palette, if any */
+ 	palette = surface->format->palette;
++	png_get_PLTE(png_ptr, info_ptr, &png_palette, &num_palette);
+ 	if ( palette ) {
+ 	    if(color_type == PNG_COLOR_TYPE_GRAY) {
+ 		palette->ncolors = 256;
+@@ -185,12 +187,12 @@
+ 		    palette->colors[i].g = i;
+ 		    palette->colors[i].b = i;
+ 		}
+-	    } else if (info_ptr->num_palette > 0 ) {
+-		palette->ncolors = info_ptr->num_palette; 
+-		for( i=0; i<info_ptr->num_palette; ++i ) {
+-		    palette->colors[i].b = info_ptr->palette[i].blue;
+-		    palette->colors[i].g = info_ptr->palette[i].green;
+-		    palette->colors[i].r = info_ptr->palette[i].red;
++	    } else if (num_palette > 0 ) {
++		palette->ncolors = num_palette; 
++		for( i=0; i<num_palette; ++i ) {
++		    palette->colors[i].b = png_palette[i].blue;
++		    palette->colors[i].g = png_palette[i].green;
++		    palette->colors[i].r = png_palette[i].red;
+ 		}
+ 	    }
+ 	}
