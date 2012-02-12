@@ -47,7 +47,9 @@ przeciwko komputerowi, innym graczom oraz zdalnie poprzez Internet lub
 LAN.
 
 %prep
-%setup -q -n scorched
+%setup -qc
+mv scorched/* .
+rm -rf scorched-dep-osx scorched
 %undos src/common/porting/windows.h src/common/image/ImagePngFactory.cpp
 %patch0 -p1
 %patch1 -p1
