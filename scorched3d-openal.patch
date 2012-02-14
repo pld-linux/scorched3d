@@ -1,6 +1,6 @@
---- scorched/configure-al.m4~	2009-10-02 00:22:31.000000000 +0200
-+++ scorched/configure-al.m4	2010-05-04 13:58:31.557872694 +0200
-@@ -1,109 +1,8 @@
+--- scorched3d-43.3/configure-al.m4~	2011-12-31 15:51:36.000000000 +0100
++++ scorched3d-43.3/configure-al.m4	2012-02-14 12:34:50.668902374 +0100
+@@ -1,118 +1,8 @@
  dnl Checking for OpenAL
 -AC_ARG_WITH([openal-static],
 -            AC_HELP_STRING([--with-openal-static],
@@ -12,23 +12,32 @@
 -AC_MSG_CHECKING(for OpenAL support)
 -AC_PATH_PROG(OPENAL_CONFIG, openal-config, no)
 -if test x$OPENAL_CONFIG = xno; then
--	echo "*** The openal-config script installed by OpenAL could not be found"
--	echo "*** Make sure openal-config is in your path, or set the OPENAL_CONFIG"
--	echo "*** environment variable to the full path to openal-config."
+-	echo "The openal-config script installed by OpenAL could not be found"
+-	echo "Make sure openal-config is in your path, or set the OPENAL_CONFIG"
+-	echo "environment variable to the full path to openal-config."
+-	echo "Trying pkg-config instead."
 -
--	AC_MSG_ERROR([*** Can't find the openal library. Try: http://www.openal.org/])
--else
+-	AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
+-	if test x$PKG_CONFIG = xno; then
+-		echo "The pkg-config script could not be found"
+-		echo "Make sure pkg-config is in your path, or set the PKG_CONFIG"
+-		echo "environment variable to the full path to pkg-config."
 -
--	if test x"$use_static_openal" = x"yes"; then
--		AL_LIBS="/usr/local/lib/libopenal.a"
+-		AC_MSG_ERROR([*** Can't find the openal library. Try: http://www.openal.org/])
 -	else
--		AL_LIBS="`$OPENAL_CONFIG --libs`"
+-		OPENAL_CONFIG="$PKG_CONFIG openal";
 -	fi
--	
--	AL_CFLAGS="`$OPENAL_CONFIG --cflags`"
--
--	AC_MSG_RESULT(yes)
 -fi
+-	
+-if test x"$use_static_openal" = x"yes"; then
+-	AL_LIBS="/usr/local/lib/libopenal.a"
+-else
+-	AL_LIBS="`$OPENAL_CONFIG --libs`"
+-fi
+-
+-AL_CFLAGS="`$OPENAL_CONFIG --cflags`"
+-
+-AC_MSG_RESULT(yes)
 -
 -AC_MSG_CHECKING(for Freealut support)
 -AC_PATH_PROG(FREEALUT_CONFIG, freealut-config, no)
