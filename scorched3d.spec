@@ -11,6 +11,7 @@ Source1:	%{name}.desktop
 Patch0:		%{name}-types.patch
 Patch1:		%{name}-openal.patch
 Patch2:		%{name}-libpng15.patch
+Patch3:		%{name}-gcc47.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenAL-devel >= 0.0.8
@@ -54,6 +55,7 @@ rm -rf scorched-dep-osx scorched
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__aclocal}
