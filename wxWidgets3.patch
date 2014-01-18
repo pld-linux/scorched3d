@@ -1,0 +1,129 @@
+diff -ur scorched3d-43.3d/src/launcher/wxdialogs/Display.cpp scorched3d-43.3d-wx3/src/launcher/wxdialogs/Display.cpp
+--- scorched3d-43.3d/src/launcher/wxdialogs/Display.cpp	2011-10-11 00:26:43.000000000 +0200
++++ scorched3d-43.3d-wx3/src/launcher/wxdialogs/Display.cpp	2014-01-18 17:36:33.855429533 +0100
+@@ -88,7 +88,7 @@
+ 	// Sound settings
+ 	wxStaticBox *soundBox = new wxStaticBox(parent, -1, wxT("&Sound"));
+ 	wxStaticBoxSizer *soundSizerMain = new wxStaticBoxSizer(soundBox, wxVERTICAL);
+-	wxFlexGridSizer *soundSizer1 = new wxFlexGridSizer(4, 2);
++	wxFlexGridSizer *soundSizer1 = new wxFlexGridSizer(4, 2, wxSize(5, 5));
+ 	wxStaticText *volumeText = new wxStaticText(parent, -1, wxT("Sound Volume :"));
+ 	wxStaticText *musicVolumeText = new wxStaticText(parent, -1, wxT("Music Volume :"));
+ 	wxStaticText *ambientVolumeText = new wxStaticText(parent, -1, wxT("Ambient Volume :"));
+@@ -137,7 +137,7 @@
+ 		wxT("Game Detail Options"));
+ 	wxStaticBoxSizer *speedSizer = new wxStaticBoxSizer(speedBox, wxHORIZONTAL);
+ 
+-	wxGridSizer *loadSizer = new wxFlexGridSizer(2, 2);
++	wxGridSizer *loadSizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	IDC_LOADULTRA_CTRL = new wxButton(parent,  ID_LOADULTRA, wxT("&Ultra Detail"), wxDefaultPosition, wxSize(120,-1));
+ 	IDC_LOADDEFAULTS_CTRL = new wxButton(parent, ID_LOADDEFAULTS, wxT("&Normal Detail"), wxDefaultPosition, wxSize(120,-1));
+ 	IDC_LOADMEDIUM_CTRL = new wxButton(parent, ID_LOADMEDIUM, wxT("Faster Detail"), wxDefaultPosition, wxSize(120,-1));
+@@ -471,7 +471,7 @@
+ {
+ 	wxScrolledWindow *scrolledWindow = new wxScrolledWindow(parent, -1, 
+ 		wxDefaultPosition, wxSize(480, 250));
+-	wxSizer *sizer = new wxFlexGridSizer(5, 1);
++	wxSizer *sizer = new wxFlexGridSizer(5, 1, wxSize(5, 5));
+ 	
+ 	keyboardKeyList.clear();
+ 	if (!Keyboard::instance()->loadKeyFile())
+diff -ur scorched3d-43.3d/src/launcher/wxdialogs/DisplayDialog.cpp scorched3d-43.3d-wx3/src/launcher/wxdialogs/DisplayDialog.cpp
+--- scorched3d-43.3d/src/launcher/wxdialogs/DisplayDialog.cpp	2012-01-08 16:26:34.000000000 +0100
++++ scorched3d-43.3d-wx3/src/launcher/wxdialogs/DisplayDialog.cpp	2014-01-18 17:39:41.062094844 +0100
+@@ -733,7 +733,7 @@
+ 		convertString(S3D::formatStringBuffer("%s.s3m", (const char *) (selection.mb_str(wxConvUTF8)))), // default filename
+ 		wxT(""), // default extension
+ 		wxT("*.s3m"),
+-		wxSAVE);
++		wxFD_SAVE);
+ 	if (file.empty()) return;
+ 	ModFiles files;
+ 	if (!files.loadModFiles(std::string(selection.mb_str(wxConvUTF8)), false))
+@@ -757,7 +757,7 @@
+ 		wxT(""), // default filename
+ 		wxT(""), // default extension
+ 		wxT("*.s3m"),
+-		wxOPEN | wxFILE_MUST_EXIST);
++		wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+ 	if (file.empty()) return;
+ 	ModFiles files;
+ 	std::string mod;
+diff -ur scorched3d-43.3d/src/launcher/wxdialogs/KeyDialog.cpp scorched3d-43.3d-wx3/src/launcher/wxdialogs/KeyDialog.cpp
+--- scorched3d-43.3d/src/launcher/wxdialogs/KeyDialog.cpp	2011-06-28 01:11:12.000000000 +0200
++++ scorched3d-43.3d-wx3/src/launcher/wxdialogs/KeyDialog.cpp	2014-01-18 17:41:35.702094014 +0100
+@@ -107,7 +107,7 @@
+ 		keyDialogControlDown = event.ControlDown();
+ 		keyDialogShiftDown = event.ShiftDown();
+ 		keyDialogAltDown = event.AltDown();
+-		keyDialogKeyCode = event.KeyCode();
++		keyDialogKeyCode = event.GetKeyCode();
+ 		frame_->EndModal(0);
+ 	}
+ }
+diff -ur scorched3d-43.3d/src/launcher/wxdialogs/SettingsDialog.cpp scorched3d-43.3d-wx3/src/launcher/wxdialogs/SettingsDialog.cpp
+--- scorched3d-43.3d/src/launcher/wxdialogs/SettingsDialog.cpp	2011-09-06 01:29:53.000000000 +0200
++++ scorched3d-43.3d-wx3/src/launcher/wxdialogs/SettingsDialog.cpp	2014-01-18 17:43:23.118759904 +0100
+@@ -105,7 +105,7 @@
+ 	mainPanel_ = new wxPanel(book_, -1);
+ 	book_->AddPage(mainPanel_, wxT("Main"));
+ 	wxSizer *mainPanelSizer = new wxBoxSizer(wxVERTICAL);
+-	wxSizer *sizer = new wxFlexGridSizer(2, 2);
++	wxSizer *sizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	mainPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	setters_.push_back(
+@@ -166,7 +166,7 @@
+ {
+ 	moneyPanel_ = new wxPanel(book_, -1);
+ 	wxSizer *ecoPanelSizer = new wxBoxSizer(wxVERTICAL);
+-	wxSizer *sizer = new wxFlexGridSizer(2, 2);
++	wxSizer *sizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	ecoPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	setters_.push_back(
+@@ -215,7 +215,7 @@
+ {
+ 	scorePanel_ = new wxPanel(book_, -1);
+ 	wxSizer *ecoPanelSizer = new wxBoxSizer(wxVERTICAL);
+-	wxSizer *sizer = new wxFlexGridSizer(2, 2);
++	wxSizer *sizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	ecoPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	setters_.push_back(
+@@ -249,7 +249,7 @@
+ {
+ 	weaponsPanel_ = new wxPanel(book_, -1);
+ 	wxSizer *ecoPanelSizer = new wxBoxSizer(wxVERTICAL);
+-	wxSizer *sizer = new wxFlexGridSizer(2, 2);
++	wxSizer *sizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	ecoPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	setters_.push_back(
+@@ -286,7 +286,7 @@
+ {
+ 	envPanel_ = new wxPanel(book_, -1);
+ 	wxSizer *envPanelSizer = new wxBoxSizer(wxVERTICAL);
+-	wxSizer *sizer = new wxFlexGridSizer(2, 2);
++	wxSizer *sizer = new wxFlexGridSizer(2, 2, wxSize(5, 5));
+ 	envPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	setters_.push_back(
+@@ -337,7 +337,7 @@
+ 	wxScrolledWindow *scrolledWindow = new wxScrolledWindow(landPanel_, -1, 
+ 		wxDefaultPosition, wxSize(225, 200));
+ 
+-	wxSizer *sizer = new wxFlexGridSizer(3, 3);
++	wxSizer *sizer = new wxFlexGridSizer(3, 3, wxSize(5, 5));
+ 	int i = 0;
+ 	std::list<LandscapeDefinitionsEntry> &defns =
+ 		landscapeDefinitions.getAllLandscapes();
+@@ -438,7 +438,7 @@
+ 		wxT("Players are persistent for game"));
+ 	playersPanelSizer->Add(IDC_SERVER_RESIDUAL_CTRL, 0, wxALIGN_CENTER | wxTOP, 10);
+ 		
+-	wxSizer *sizer = new wxGridSizer(3, 3);
++	wxSizer *sizer = new wxGridSizer(3, 3, wxSize(5, 5));
+ 	playersPanelSizer->Add(sizer, 0, wxALL | wxALIGN_CENTER, 10);
+ 
+ 	for (int i=0; i<24; i++)
