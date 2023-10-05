@@ -1,0 +1,11 @@
+--- scorched3d-43.3d/acinclude.m4~	2008-03-03 22:17:18.000000000 +0100
++++ scorched3d-43.3d/acinclude.m4	2023-10-06 01:15:06.488368648 +0200
+@@ -317,7 +317,7 @@
+       no_wx=yes
+     else
+       WX_LIBS=`$WX_CONFIG_WITH_ARGS --libs`
+-      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static --libs`
++      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --libs`
+ 
+       dnl starting with version 2.2.6 wx-config has --cppflags argument
+       wx_has_cppflags=""

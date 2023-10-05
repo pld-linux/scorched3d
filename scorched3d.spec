@@ -1,18 +1,18 @@
 Summary:	A 3D version of the classic DOS game Scorched Earth
 Summary(pl.UTF-8):	Wersja 3D klasycznej DOS-owej gry Scorched Earth
 Name:		scorched3d
-Version:	43.3d
-Release:	5
+Version:	44
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Games
 Source0:	http://downloads.sourceforge.net/scorched3d/Scorched3D-%{version}-src.tar.gz
-# Source0-md5:	9c3043282a9e7451468ff325bef3b04c
+# Source0-md5:	c395d54a7a43cf91166d2cc0f7dec83e
 Source1:	%{name}.desktop
 Patch0:		%{name}-types.patch
 Patch1:		%{name}-openal.patch
-Patch2:		%{name}-libpng15.patch
-Patch3:		%{name}-gcc47.patch
 Patch4:		wxWidgets3.patch
+Patch5:		no-static-wx.patch
+Patch6:		returntype.patch
 URL:		http://www.scorched3d.co.uk/
 BuildRequires:	ImageMagick-coder-png
 BuildRequires:	OpenAL-devel >= 0.0.8
@@ -32,7 +32,7 @@ BuildRequires:	libvorbis-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.533
 BuildRequires:	sed >= 4.0
-BuildRequires:	wxGTK2-devel >= 2.6.0
+BuildRequires:	wxGTK3-unicode-devel >= 2.6.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -55,9 +55,9 @@ rm -rf scorched-dep-osx scorched
 %undos src/common/porting/windows.h src/common/image/ImagePngFactory.cpp
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p0
 
 %build
 %{__aclocal}
@@ -65,7 +65,7 @@ rm -rf scorched-dep-osx scorched
 %{__automake}
 %configure \
 	--datadir=%{_datadir}/%{name} \
-	--with-wx-config=wx-gtk2-ansi-config
+	--with-wx-config=wx-gtk3-unicode-config
 
 %{__make}
 
