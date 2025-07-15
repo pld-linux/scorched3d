@@ -53,11 +53,11 @@ LAN.
 mv scorched/* .
 rm -rf scorched-dep-osx scorched
 %undos src/common/porting/windows.h src/common/image/ImagePngFactory.cpp
-%patch0 -p1
-%patch1 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p0
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p0
 
 %build
 %{__aclocal}
