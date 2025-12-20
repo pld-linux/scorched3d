@@ -25,6 +25,7 @@ BuildRequires:	expat-devel
 BuildRequires:	fftw3-single-devel >= 3.0
 BuildRequires:	freealut-devel
 BuildRequires:	freetype-devel >= 2.1.0
+BuildRequires:	glew-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libogg-devel
 BuildRequires:	libpng-devel
